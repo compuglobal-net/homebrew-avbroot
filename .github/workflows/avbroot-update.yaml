@@ -29,7 +29,7 @@ jobs:
         id: git-check
         run: [ -z "`git status --porcelain`" ] && echo NEW_RELEASE="false" >> $GITHUB_OUTPUT || echo NEW_RELEASE="true" >> $GITHUB_OUTPUT
       - name: Commit latest release version
-        if: steps.git-check.outputs.NEW_RELEASE == "true"
+        if: ${{ steps.git-check.outputs.NEW_RELEASE }} == "true"
         run: |
           ./.github/scripts/update-formula.sh
           git config --global user.name 'Compuglobal'
