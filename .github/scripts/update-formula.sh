@@ -11,34 +11,34 @@ REPO_JSON=$(
 # Get the repository description from the GitHub API.
 
 DESCRIPTION=$(
-  echo "$REPO_JSON" |
-    jq -r '.description'
+    jq -r '.description' <<< "$REPO_JSON"
 )
+echo "Description: $DESCRIPTION"
 
 LICENSE=$(
-  echo "$REPO_JSON" |
-      jq -r '.license | .spdx_id'
+      jq -r '.license | .spdx_id' <<< "$REPO_JSON"
 )
+echo "Software License: $LICENSE"
 
 # Get the latest release's JSON info from the GitHub API.
 
 RELEASE_JSON=$(
-  curl -s 'https://api.github.com/repos/chenxiaolong/avbroot/releases/latest'
+  curl -sL 'https://api.github.com/repos/chenxiaolong/avbroot/releases/latest'
 )
 
 # Get the latest release's version (tag_name) from the JSON info.
 
 VERSION=$(
-  echo "$RELEASE_JSON" |
-    jq -r '.tag_name'
+    jq -r '.tag_name' <<< "$RELEASE_JSON"
 )
+echo "Latest Version: $VERSION"
 
 # Extract the latest release's download URL from the JSON info.
 
 URL=$(
-  echo "$RELEASE_JSON" |
-    jq -r '.assets[] | select(.name | endswith ("universal-apple-darwin.zip")) | .browser_download_url'
+  jq -r '.assets[] | select(.name | endswith ("universal-apple-darwin.zip")) | .browser_download_url' <<< "$RELEASE_JSON"
 )
+echo "Download URL: $URL"
 
 # Calculate the SHA256 checksum for the release.
 
@@ -47,6 +47,7 @@ SHASUM=$(
     shasum -a 256 |
     awk '{ print $1 }'
 )
+echo "SHA256 Checksum: $SHASUM"
 
 # This writes a new version of the Formula/avbroot.rb file using the
 # parameters we set above.
@@ -71,4 +72,3 @@ class avbroot < Formula
   end
 end
 EOF
-
