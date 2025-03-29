@@ -18,7 +18,7 @@ jobs:
             curl -sLv https://api.github.com/repos/chenxiaolong/avbroot/releases/latest |
               jq -r ".tag_name"
           )
-          echo "release_tag=$RELEASE_TAG" >> $GITHUB_OUTPUT
+          echo "release_tag=$RELEASE_TAG" >> "$GITHUB_OUTPUT"
           echo "latest release: $RELEASE_TAG"
       - name: Store artifacts
         run: |
@@ -27,7 +27,10 @@ jobs:
           echo "Saved ${{ steps.get_release.outputs.RELEASE_TAG }} to avbroot-latest.txt"
       - name: Check for modified files
         id: git-check
-        run: [ -n "$(git status --porcelain)" ] && echo NEW_RELEASE="true" >> $GITHUB_OUTPUT
+        run: |
+          [ -n "$(git status --porcelain)" ] && new_release="true" || new_release="false"
+          echo  NEW_RELEASE="$new_release" >> "$GITHUB_OUTPUT"
+          echo "New version released: $new_release"
       - name: Commit latest release version
         if: ${{ steps.git-check.outputs.NEW_RELEASE }} == "true"
         run: |
