@@ -49,7 +49,7 @@ echo "Download URL: $URL"
 # Calculate the SHA256 checksum for the release.
 
 SHASUM=$(
-  curl -s "$URL" |
+  curl -sL "$URL" |
     shasum -a 256 |
     awk '{ print $1 }'
 )
