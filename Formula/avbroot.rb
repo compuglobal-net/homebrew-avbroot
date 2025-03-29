@@ -10,7 +10,7 @@ class Avbroot < Formula
   license "GPL-3.0"
 
   def install
-    bin.install "avbroot" => "avbroot"
+    bin.install "avbroot"
   end
 
 end
