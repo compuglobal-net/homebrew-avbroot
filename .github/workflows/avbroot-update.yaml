@@ -41,3 +41,5 @@ jobs:
           git add Formula/avbroot.rb
           git commit -am "New avbroot release ${{ steps.get_release.outputs.RELEASE_TAG }}"
           git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
