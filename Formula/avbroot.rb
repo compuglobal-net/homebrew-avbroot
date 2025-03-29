@@ -1,4 +1,4 @@
-class AVBRoot < Formula
+class Avbroot < Formula
   desc "Sign (and root) Android A/B OTAs with custom keys while preserving Android Verified Boot"
   version "3.14.0"
   homepage "https://github.com/chenxiaolong/avbroot"

@@ -65,7 +65,7 @@ echo "SHA256 Checksum: $SHASUM"
 # standard relative paths to go up 2 directories.
 
 cat <<EOF > "${0%/*}/../../Formula/avbroot.rb"
-class AVBRoot < Formula
+class Avbroot < Formula
   desc "$DESCRIPTION"
   version "${VERSION#v}"
   homepage "https://github.com/chenxiaolong/avbroot"
