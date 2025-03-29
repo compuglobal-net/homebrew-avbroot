@@ -27,8 +27,7 @@ jobs:
           echo "Saved ${{ steps.get_release.outputs.RELEASE_TAG }} to avbroot-latest.txt"
       - name: Check for modified files
         id: git-check
-        run: |
-          [[ -n "$(git status --porcelain)" ]] && echo NEW_RELEASE="true" >> $GITHUB_OUTPUT
+        run: [ -n "$(git status --porcelain)" ] && echo NEW_RELEASE="true" >> $GITHUB_OUTPUT
       - name: Commit latest release version
         if: ${{ steps.git-check.outputs.NEW_RELEASE }} == "true"
         run: |
