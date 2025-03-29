@@ -1,0 +1,38 @@
+name: Get latest avbroot release version
+on:
+  schedule:
+    - cron: "0 10 * * *"
+jobs:
+  get-version:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.REPO_SCOPED_TOKEN }}
+      - name: Fetch release version
+        id: get_release
+        run: |
+          RELEASE_TAG=$(
+            curl -sL https://api.github.com/repos/chenxiaolong/avbroot/releases/latest |
+              jq -r ".tag_name"
+          )
+          echo "release_tag=$RELEASE_TAG" >> $GITHUB_OUTPUT
+          echo "latest release: $RELEASE_TAG"
+      - name: Store artifacts
+        run: |
+          # Store the newly fetched release version in a file
+          echo "${{ steps.get_release.outputs.RELEASE_TAG }}" > avbroot-latest.txt
+          echo "Saved ${{ steps.get_release.outputs.RELEASE_TAG }} to avbroot-latest.txt"
+      - name: Check for modified files
+        id: git-check
+        run: echo ::set-output name=modified::$([ -z "`git status --porcelain`" ] && echo "false" || echo "true")
+      - name: Commit latest release version
+        if: steps.git-check.outputs.modified == 'true'
+        run: |
+          ./.github/scripts/update-formula.sh
+          git config --global user.name 'Compuglobal'
+          git config --global user.email 'admin@compuglobal.net'
+          git add avbroot-latest.txt
+          git add Formula/avbroot.rb
+          git commit -am "New avbroot release ${{ steps.get_release.outputs.RELEASE_TAG }}"
+          git push
