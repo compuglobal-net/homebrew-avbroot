@@ -8,12 +8,14 @@ REPO_JSON=$(
   curl -s 'https://api.github.com/repos/chenxiaolong/avbroot'
 )
 
-# Get the repository description from the GitHub API.
+# Get the repository description from the JSON info.
 
 DESCRIPTION=$(
     jq -r '.description' <<< "$REPO_JSON"
 )
 echo "Description: $DESCRIPTION"
+
+# Extract the repository software license from the JSON info.
 
 LICENSE=$(
       jq -r '.license | .spdx_id' <<< "$REPO_JSON"
@@ -26,7 +28,7 @@ RELEASE_JSON=$(
   curl -sL 'https://api.github.com/repos/chenxiaolong/avbroot/releases/latest'
 )
 
-# Get the latest release's version (tag_name) from the JSON info.
+# Extract the latest release's version (tag_name) from the JSON info.
 
 VERSION=$(
     jq -r '.tag_name' <<< "$RELEASE_JSON"

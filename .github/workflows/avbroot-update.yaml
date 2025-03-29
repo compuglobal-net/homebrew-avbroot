@@ -15,7 +15,7 @@ jobs:
         id: get_release
         run: |
           RELEASE_TAG=$(
-            curl -sL https://api.github.com/repos/chenxiaolong/avbroot/releases/latest |
+            curl -sLv https://api.github.com/repos/chenxiaolong/avbroot/releases/latest |
               jq -r ".tag_name"
           )
           echo "release_tag=$RELEASE_TAG" >> $GITHUB_OUTPUT
@@ -27,9 +27,9 @@ jobs:
           echo "Saved ${{ steps.get_release.outputs.RELEASE_TAG }} to avbroot-latest.txt"
       - name: Check for modified files
         id: git-check
-        run: echo ::set-output name=modified::$([ -z "`git status --porcelain`" ] && echo "false" || echo "true")
+        run: [ -z "`git status --porcelain`" ] && echo NEW_RELEASE="false" >> $GITHUB_OUTPUT || echo NEW_RELEASE="true" >> $GITHUB_OUTPUT
       - name: Commit latest release version
-        if: steps.git-check.outputs.modified == 'true'
+        if: steps.git-check.outputs.NEW_RELEASE == "true"
         run: |
           ./.github/scripts/update-formula.sh
           git config --global user.name 'Compuglobal'
