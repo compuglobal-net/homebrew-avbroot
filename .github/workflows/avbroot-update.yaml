@@ -32,7 +32,7 @@ jobs:
           echo  NEW_RELEASE="$new_release" >> "$GITHUB_OUTPUT"
           echo "New version released: $new_release"
       - name: Commit latest release version
-        if: ${{ steps.git-check.outputs.NEW_RELEASE }} == "true"
+        if: steps.git-check.outputs.NEW_RELEASE == "true"
         run: |
           ./.github/scripts/update-formula.sh
           git config --global user.name 'Compuglobal'
