@@ -5,8 +5,8 @@ set -e
 # Get the repository's JSON info from the GitHub API
 
 REPO_JSON=$(
-  curl
-    -H 'Authorization: Bearer ${{ secrets.REPO_ACCESS_TOKEN }}'
+  curl \
+    -H 'Authorization: Bearer ${{ secrets.REPO_ACCESS_TOKEN }}' \
     -s 'https://api.github.com/repos/chenxiaolong/avbroot'
 )
 
@@ -27,8 +27,8 @@ echo "Software License: $LICENSE"
 # Get the latest release's JSON info from the GitHub API.
 
 RELEASE_JSON=$(
-  curl
-    -H 'Authorization: Bearer ${{ secrets.REPO_ACCESS_TOKEN }}'
+  curl \
+    -H 'Authorization: Bearer ${{ secrets.REPO_ACCESS_TOKEN }}' \
     -sL 'https://api.github.com/repos/chenxiaolong/avbroot/releases/latest'
 )
 
