@@ -14,11 +14,11 @@ jobs:
       - name: Fetch release version
         id: get_release
         run: |
-          RELEASE_TAG=$(
+          release_tag=$(
             curl -sLv https://api.github.com/repos/chenxiaolong/avbroot/releases/latest |
               jq -r ".tag_name"
           )
-          echo "release_tag=$RELEASE_TAG" >> "$GITHUB_OUTPUT"
+          echo "RELEASE_TAG=$releasse_tag" >> "$GITHUB_OUTPUT"
           echo "latest release: $RELEASE_TAG"
       - name: Store artifacts
         run: |
