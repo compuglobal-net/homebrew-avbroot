@@ -19,7 +19,7 @@ jobs:
               jq -r ".tag_name"
           )
           echo "RELEASE_TAG=$releasse_tag" >> "$GITHUB_OUTPUT"
-          echo "latest release: $RELEASE_TAG"
+          echo "latest release: $release_tag"
       - name: Store artifacts
         run: |
           # Store the newly fetched release version in a file
