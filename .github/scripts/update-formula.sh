@@ -6,7 +6,7 @@ set -e
 
 REPO_JSON=$(
   curl \
-    -v -H "Authorization: Bearer $GITHUB_TOKEN" \
+    -H "Authorization: Bearer $GITHUB_TOKEN" \
     -s 'https://api.github.com/repos/chenxiaolong/avbroot'
 )
 
@@ -28,7 +28,7 @@ echo "Software License: $LICENSE"
 
 RELEASE_JSON=$(
   curl \
-    -v -H "Authorization: Bearer $GITHUB_TOKEN" \
+    -H "Authorization: Bearer $GITHUB_TOKEN" \
     -sL 'https://api.github.com/repos/chenxiaolong/avbroot/releases/latest'
 )
 
