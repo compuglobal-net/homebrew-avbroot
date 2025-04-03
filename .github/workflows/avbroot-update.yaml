@@ -15,7 +15,7 @@ jobs:
         id: get_release
         run: |
           release_tag=$(
-            curl -sLv https://api.github.com/repos/chenxiaolong/avbroot/releases/latest |
+            curl -H "Authorization: Bearer $GITHUB_TOKEN" -sL https://api.github.com/repos/chenxiaolong/avbroot/releases/latest |
               jq -r ".tag_name"
           )
           echo "RELEASE_TAG=$releasse_tag" >> "$GITHUB_OUTPUT"
