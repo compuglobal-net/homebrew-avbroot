@@ -1,18 +1,18 @@
-# Compuglobal-net Avbroot
+# avbroot for Homebrew
 
-## How do I install these formulae?
+### How do I install this formula?
 
-`brew install compuglobal-net/avbroot/<formula>`
+`brew install compuglobal-net/avbroot/avbroot`
 
-Or `brew tap compuglobal-net/avbroot` and then `brew install <formula>`.
+Or `brew tap compuglobal-net/avbroot` and `brew install avbroot`.
 
-Or, in a `brew bundle` `Brewfile`:
+Or in a brew bundle Brewfile:
 
 ```ruby
 tap "compuglobal-net/avbroot"
-brew "<formula>"
+brew "avbroot"
 ```
 
-## Documentation
+### Documentation
 
 `brew help`, `man brew` or check [Homebrew's documentation](https://docs.brew.sh).
