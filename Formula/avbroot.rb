@@ -1,9 +1,9 @@
 class Avbroot < Formula
   desc "Tool for manipulating and re-signing Android A/B OTAs"
-  version "3.23.1"
+  version "3.23.2"
   homepage "https://github.com/chenxiaolong/avbroot"
-  url "https://github.com/chenxiaolong/avbroot/releases/download/v3.23.1/avbroot-3.23.1-universal-apple-darwin.zip"
-  sha256 "f007b4169786c39cc131dc0cf0c09d9efda1e550d29914fb6975cf45791888c0"
+  url "https://github.com/chenxiaolong/avbroot/releases/download/v3.23.2/avbroot-3.23.2-universal-apple-darwin.zip"
+  sha256 "1b1f58957868fc4885618eb8a487587448f498d493bdf32f382c9acfd3f18b3e"
   license "GPL-3.0"
 
   def install
